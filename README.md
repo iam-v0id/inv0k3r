@@ -19,6 +19,7 @@
 **2) MODIFY MEETING APP PREFERENCES**
 - Make sure you join the meeting with computer audio.
 - Make sure your meeting app dosen't show any preview before joining.
+- I recommend uninstalling current GotoMeeting App and use https://global.gotomeeting.com/install
 
 **3) ADD ZOOM TO PATH**
 - Right click on Zoom app, click on "Open file location".
@@ -28,5 +29,5 @@
 # SCREENSHOTS
 
 <p align="left">
-  <a><img src="https://drive.google.com/file/d/1FnSAv82KQbECAtDTyOpIN9PvgUQcbjeY/view?usp=sharing" ></a>
+  <a><img src="https://github.com/iam-v0id/inv0k3r/blob/master/Screenshot.png" ></a>
 </p>

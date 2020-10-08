@@ -1,3 +1,5 @@
+import os
+
 def getPlatform():
     Platform = os.popen("uname -a 2> NUL").read()
     if 'Android' in Platform:

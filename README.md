@@ -23,10 +23,35 @@
 - Make sure your meeting app dosen't show any preview before joining.
 - I recommend uninstalling current GotoMeeting App and use https://global.gotomeeting.com/install
 
-**3) ADD ZOOM TO PATH**
+**3) ADD ZOOM TO PATH** 
 - Right click on Zoom app, click on "Open file location".
 - Copy the path of Zoom\bin.
 - Add it to the Path Variable.
+
+# USAGE
+**ANDROID**
+- **Initial Setup :-**
+    - Install termux from PlayStore.
+    - Run the following commands; hit **Enter** whenever you get a prompt.
+      - ``apt update && apt upgrade``
+      - ``apt install python git``
+      - ``git clone https://github.com/iam-v0id/inv0k3r.git``
+- **Regular Usage :-**
+  - ``cd inv0k3r && python invok3r.py``
+  - In the notifications, click on Termux and **Aquire wavelock** 
+
+**Windows**
+- Install Python <a href="https://www.python.org/downloads/">3.x.x</a>
+- Download the zip file https://github.com/iam-v0id/inv0k3r/archive/master.zip
+- Extract the zip file
+- click on run.cmd
+
+**Linux**
+- Run the following commands
+- ``apt update && apt upgrade``
+- ``apt install python git``
+- ``git clone https://github.com/iam-v0id/inv0k3r.git``
+- ``cd inv0k3r && python3 invok3r.py``
 
 # SCREENSHOTS
 

@@ -40,13 +40,13 @@
   - ``cd inv0k3r && python invok3r.py``
   - In the notifications, click on Termux and **Aquire wavelock** 
 
-**Windows**
+**WINDOWS**
 - Install Python <a href="https://www.python.org/downloads/">3.x.x</a>
 - Download the zip file https://github.com/iam-v0id/inv0k3r/archive/master.zip
 - Extract the zip file
 - click on run.cmd
 
-**Linux**
+**LINUX**
 - Run the following commands
 - ``apt update && apt upgrade``
 - ``apt install python git``

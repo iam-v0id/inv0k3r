@@ -39,10 +39,15 @@ if __name__ == "__main__":
                 os.system("TASKKILL /F  /IM  Zoom.exe > NUL 2>&1")
             elif currPlatform == 'Linux':
                 os.system("pkill zoom")
-            # Starts the meeting
-            for minutes in range(Meeting_Times[0][2]):            
-                os.system('%s %s  > NUL 2>&1' %(cmd, Meeting_Times[0][1]))
-                if 'zoom' not in Meeting_Times[0][1]:
-                    break
-                time.sleep(60)
+            # Starts the meeting         
+            os.system('%s %s  > NUL 2>&1' %(cmd, Meeting_Times[0][1]))
+            if 'zoom' in Meeting_Times[0][1]:
+                time.sleep(100)
+                pid= re.findall(r"\d+",os.popen("wmic process get Caption,ParentProcessId,ProcessId | find \"Zoom\"").read())[-1]
+                while (Meeting_Times[0][0]+60*Meeting_Times[0][2])>time.time() :
+                    curr_pid=re.findall(r"\d+",os.popen("wmic process get Caption,ParentProcessId,ProcessId | find \"Zoom\"").read())[-1]
+                    if pid != curr_pid:
+                        os.system('%s %s  > NUL 2>&1' %(cmd, Meeting_Times[0][1]))
+                        time.sleep(100)
+                        pid=re.findall(r"\d+",os.popen("wmic process get Caption,ParentProcessId,ProcessId | find \"Zoom\"").read())[-1]
             del Meeting_Times[0]

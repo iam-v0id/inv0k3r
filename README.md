@@ -11,8 +11,11 @@
 
 **2) Automatically Rejoins Zoom Meetings After 40 Mins**
 
+<<<<<<< HEAD
 **3) Added support for Windows, Linux and Android**
 
+=======
+>>>>>>> beta
 # PREREQUISITES
 **1) MODIFY POWER PLAN SETTINGS**
 - Never turn off Display.
@@ -52,6 +55,7 @@
 - ``apt install python git``
 - ``git clone https://github.com/iam-v0id/inv0k3r.git``
 - ``cd inv0k3r && python3 invok3r.py``
+
 
 # SCREENSHOTS
 

@@ -11,11 +11,6 @@
 
 **2) Automatically Rejoins Zoom Meetings After 40 Mins**
 
-<<<<<<< HEAD
-**3) Added support for Windows, Linux and Android**
-
-=======
->>>>>>> beta
 # PREREQUISITES
 **1) MODIFY POWER PLAN SETTINGS**
 - Never turn off Display.

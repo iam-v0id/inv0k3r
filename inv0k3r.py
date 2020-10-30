@@ -90,8 +90,8 @@ class Invoker(Thread):
                 else:
                     os.system('termux-open-url %s  > /dev/null 2>&1' % data[0][1])
                     if 'zoom' in self.data[0][1]:
-                        time.sleep(40*60)
-                        os.system('termux-open-url %s  > /dev/null 2>&1' % data[0][1])
+                        while (self.data[0][0]+60*self.data[0][2]) > time.time():
+                            os.system('termux-open-url %s  > /dev/null 2>&1' % data[0][1])
                     del self.data[0]
                     continue
                 webbrowser.open(self.data[0][1])

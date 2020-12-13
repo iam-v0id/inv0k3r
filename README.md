@@ -9,7 +9,7 @@
 # FEATURES
 **1) Open Meeting Links on Time Automatically**
 
-**2) Automatically Rejoins Zoom Meetings After 40 Mins**
+**2) Automatically Rejoins Zoom Meetings whenever it dicconnects before specified time**
 
 # PREREQUISITES
 **1) MODIFY POWER PLAN SETTINGS**

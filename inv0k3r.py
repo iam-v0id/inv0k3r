@@ -76,8 +76,7 @@ class Invoker(Thread):
         elif self.currPlatform == 'Linux':
             pass
             """
-                    TODO : Implement getPid() for Linux  
-                    
+                    TODO: Implement getPid() for Linux    
             """
 
     def invoke(self):
@@ -99,11 +98,15 @@ class Invoker(Thread):
                 if 'zoom' in self.data[0][1]:
                     time.sleep(100)
                     pid = self.getPid()
+                    time.sleep(25*60)
                     while (self.data[0][0]+60*self.data[0][2]) > time.time():
                         if pid != self.getPid():
+                            os.system("TASKKILL /F  /IM  Zoom.exe > NUL 2>&1")
                             webbrowser.open(self.data[0][1])
                             time.sleep(100)
                             pid = self.getPid()
+                            time.sleep(25*60)
+                        time.sleep(50)
                 del self.data[0]
 
 

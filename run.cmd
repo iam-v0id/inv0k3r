@@ -1,1 +1,1 @@
-  python inv0k3r.py
+python inv0k3r.py

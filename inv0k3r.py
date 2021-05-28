@@ -1,9 +1,16 @@
 import time
 import os
 import datetime
-from threading import *
+from threading import Thread
 import re
 import webbrowser
+
+
+class Data:
+    def __init__(self, start_time, duration, link):
+        self.start_time = start_time
+        self.duration = duration
+        self.link = link
 
 
 class Invoker(Thread):
@@ -23,38 +30,34 @@ class Invoker(Thread):
     def run(self):
         while True:
 
-            while True:
-                Link = input('Enter a valid Meeting Link\t  : ')
-                pattern = r"^[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$"
-                if re.search(pattern, Link) == None:
-                    print("INVALID URL")
-                else:
-                    break
+            link = input('Enter a valid Meeting Link\t  : ').strip()
 
             while True:
                 try:
-                    Time = list(map(int, input('Start Time(HH MM) <24-hour Format>: ').split()))
-                    if Time[0] >= 0 and Time[0] < 24 and Time[1] >= 0 and Time[1] < 60:
+                    meeting_time = list(
+                        map(int, input('Start Time(HH MM) <24-hour Format>: ').split()))
+                    if meeting_time[0] >= 0 and meeting_time[0] < 24 and meeting_time[1] >= 0 and meeting_time[1] < 60:
                         break
                     else:
                         raise Exception
                 except:
-                    print("Expecting two space seperated integers [0-23] [0-59]")
+                    print(
+                        "Expecting two space seperated integers [0-23] [0-59]")
 
             while True:
                 try:
-                    Duration = int(input('Duration of the meeting (Minutes) : '))
+                    duration = int(
+                        input('Duration of the meeting (Minutes) : '))
                     break
                 except:
                     print("Expecting a single Integer")
-            
-            print('SUCCESS!!')
-            print()
 
             curr = datetime.datetime.now()
-            Meeting_Time = datetime.datetime(curr.year, curr.month, curr.day, Time[0], Time[1]).timestamp()
-            self.data.append([Meeting_Time, Link, Duration])
-            self.data.sort()
+            start_time = datetime.datetime(
+                curr.year, curr.month, curr.day, meeting_time[0], meeting_time[1]).timestamp()
+            self.data.append(Data(start_time, duration, link))
+            self.data.sort(key=lambda x: x.start_time)
+            print("\n----------SUCCESS! Added this to the queue----------\n\n")
 
     def getPlatform(self):
         Platform = os.popen("uname -a 2> NUL").read()
@@ -82,30 +85,33 @@ class Invoker(Thread):
     def invoke(self):
         self.currPlatform = self.getPlatform()
         while True:
-            if len(self.data) > 0 and time.time() > self.data[0][0]:
+            if len(self.data) > 0 and time.time() > self.data[0].start_time:
                 if self.currPlatform == 'Windows':
                     os.system("TASKKILL /F  /IM  Zoom.exe > NUL 2>&1")
+                    pass
                 elif self.currPlatform == 'Linux':
                     os.system("pkill zoom")
                 else:
-                    os.system('termux-open-url %s  > /dev/null 2>&1' % data[0][1])
+                    os.system('termux-open-url %s  > /dev/null 2>&1' %
+                              self.data[0].link)
                     if 'zoom' in self.data[0][1]:
                         while (self.data[0][0]+60*self.data[0][2]) > time.time():
-                            os.system('termux-open-url %s  > /dev/null 2>&1' % data[0][1])
+                            os.system(
+                                'termux-open-url %s  > /dev/null 2>&1' % self.data[0].link)
                     del self.data[0]
                     continue
-                webbrowser.open(self.data[0][1])
-                if 'zoom' in self.data[0][1]:
+                webbrowser.open(self.data[0].link)
+                if 'zoom' in self.data[0].link:
                     time.sleep(100)
                     pid = self.getPid()
-                    time.sleep(25*60)
-                    while (self.data[0][0]+60*self.data[0][2]) > time.time():
+                    time.sleep(30*60)
+                    while (self.data[0].start_time+60*self.data[0].duration) > time.time():
                         if pid != self.getPid():
-                            os.system("TASKKILL /F  /IM  Zoom.exe > NUL 2>&1")
-                            webbrowser.open(self.data[0][1])
+                            webbrowser.open(self.data[0].link)
                             time.sleep(100)
                             pid = self.getPid()
-                            time.sleep(25*60)
+                            time.sleep(
+                                min(30*60, (self.data[0].start_time+60*self.data[0].duration)-time.time()))
                         time.sleep(50)
                 del self.data[0]
 
